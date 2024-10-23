@@ -6,11 +6,10 @@
 void menu() {
     int choice;
     std::cout << "-Главное меню-\n";
-    std::cout << "Задание 1.\n";
-    std::cout << "Используя цикл while вычислить N (от 1 до 30) = ∑ (ai - bi)^2,\n";
-    std::cout << "где a и b определены по формуле: \n";
-    std::cout << "ai = { i, если i нечётное || i/2, если i чётное}\n";
-    std::cout << "bi = { i^2, если i нечётное || i^3, если i чётное}\n";
+    std::cout << "Задание 2.\n";
+    std::cout << "Используя цикл do while найти сумму ряда с точностью eps = 10^-3,\n";
+    std::cout << "общий член которого dn = 1/2^n + 1/3^n. \n";
+    std::cout << "При составлении программы считать, что точноcть достигнута, если dn < eps.\n";
     std::cout << "Выполнила Горбачёва Анна, гр.453504\n";
     std::cout << "1 - Результат\n";
     std::cout << "0 - Выход\n";
@@ -31,26 +30,18 @@ int get_input() {
 
 void result() {
     std::cout << "Результат: \n";
-    int i = 1;
-    double N = 0;
-    while (i <= 30)
+    const double eps = 1e-3;
+    int n = 1;
+    double res = 0;
+    double dn;
+    do
     {
-        double a, b;
-        if (i % 2 == 0)
-        {
-            a = i / 2;
-            b = pow(i, 3);
-        }
-        else if (i % 2 == 1)
-        {
-            a = i;
-            b = pow(i, 2);
-        }
-        N += pow((a - b), 2);
-        i++;
-    }
-    std::cout << N << "\n";
-}    
+        dn = ((1 / pow(2, n)) + (1 / pow(3, n)));
+        n++;
+        res += dn;
+    } while (dn >= eps);
+    std::cout << res << std::endl;
+}
 
 int main()
 {
