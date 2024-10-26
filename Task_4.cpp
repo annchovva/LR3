@@ -13,7 +13,7 @@ void menu() {
     std::cout << "со значением, вычисленным с помощью стандартных функций.\n";
     std::cout << "Выполнила Горбачёва Анна, гр.453504\n";
     std::cout << "1 - Результат\n";
-    std::cout << "2 - Выход\n";
+    std::cout << "0 - Выход\n";
 }
 
 int get_input() {
@@ -79,9 +79,6 @@ void result() {
             if (N > 0) {
                 break;
             }
-            else {
-                std::cout << "Введите целое положительное число: ";
-            }
         }
         else {
             std::cout << "Введите целое положительное число: ";
@@ -129,7 +126,7 @@ int main()
         if (choice == 1) {
             result();
         }
-        else {
+        else if (choice == 0) {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
@@ -141,6 +138,9 @@ int main()
         if (retry == 0) { 
             std::cout << "Вы вышли из программы.\n";
             break;
+        }
+        else if (retry == 1) {
+            continue;
         }
     }
     return 0;
