@@ -24,7 +24,7 @@ int get_input() {
             return input[0] - '0';
         }
         else {
-            std::cout << "Введите 0 или 1!\n";
+            std::cout << "Введите 0 или 1: ";
         }
     }
 }
@@ -71,7 +71,11 @@ int main()
         std::cout << "Желаете повторить программу? (1 - да, 0 - нет): ";
         int retry = get_input();
         if (retry == 0) {
+            std::cout << "Вы вышли из программы.\n";
             break;
+        } 
+        else if (retry == 1) {
+            continue;
         }
     }
     return 0;
