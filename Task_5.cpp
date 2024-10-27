@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <string>
 #include <limits>
 
 void menu() {
@@ -71,8 +72,7 @@ std::cout << "Приближенный корень уравнение f(x) = 0:
 std::cout << "Значение функции в этой точке: f(" << root << ") = " << f(root) << "\n";
 }    
 
-int main()
-{
+int main() {
     while(true) {
         menu();
         std::cout << "Выберите действие: ";
@@ -87,9 +87,9 @@ int main()
         std::cout << ".\n";
         std::cout << ".\n";
         std::cout << ".\n";
-        std::cout << "Желаете повторить программу? (1 - да, 0 - нет): ";
+        std::cout << "Желаете повторить программу (1 - да, 0 - нет)? ";
         int retry = get_input();
-        if (retry == 0) {
+        if (retry == 0) { 
             std::cout << "Вы вышли из программы.\n";
             break;
         }
