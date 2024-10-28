@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <limits>
 #include <cmath>
 
 const double pi = 3.14159265358979323846;
@@ -66,33 +65,36 @@ double norm(double x) {
     return x;
 }
 
+double my_fabs(double x) {
+    return (x >= 0) ? x : -x;
+}
+
 double my_sin(double x) {
     x = norm(x);
-    double term = x;
-    double sum = term;
-    int n = 1;
-    while (std::abs(term) > 1e-10) {
-        term *= -x * x / ((2 * n) * (2 * n + 1));
-        sum += term;
+    double x1 = x, sum = 0;
+    long long n = 0;
+    while (my_fabs(x1) > 1e-10) {
+        sum += x1;
         n++;
+        x1 *= (-x * x) / ((2 * n * (2 * n + 1)));
     }
     return sum;
 }
 
 double my_cos(double x) {
     x = norm(x);
-    double term = 1.0;;
-    double sum = term;
-    int n = 1;
-    while (std::abs(term) > 1e-10) {
-        term *= -x * x / ((2 * n) * (2 * n - 1));
-        sum += term;
+    double x1 = 1;
+    double sum = 0;
+    int n = 0;
+    while (my_fabs(x1) > 1e-10) {
+        sum += x1;
         n++;
+        x1 *= (-x * x) / ((2 * n * (2 * n - 1)));
     }
     return sum;
 }
 
-long double my_ln(long double x) {
+long double my_ln(double x) {
     x = x < 0 ? -x : x;
     double E = e;
     long long n = 1, N = 0;
@@ -137,29 +139,26 @@ bool is_digit(std::string &input) {
 void result() {
     double x;
     std::cout << "Введите значение x: ";
-    while (!(std::cin >> x)) {
+    while (!(std::cin >> x) or std::cin.get() != '\n')
+    {
         std::cout << "Ошибка ввода. Введите корректное числовое значение x: ";
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        while (std::cin.get() != '\n');
     }
 
-    double sinx = my_sin(x);
-    double cosx = my_cos(x);
     double lnx = my_ln(x);
+    double sinx = my_sin((x));
+    double cosx = my_cos((x));
 
-    std::cout << "sin(" << x << ") = " << sinx << '\n';
-    std::cout << "cos(" << x << ") = " << cosx << '\n';
+     std::cout << "sin(" << x << ") = " << sinx << "    sin(cmath) = " << sin(norm(x)) << '\n';
+    std::cout << "cos(" << x << ") = " << cosx << "    cos(cmath) = " << cos(norm(x)) << '\n';
     if (x == 0) {
         std::cout << "Ошибка: натуральный логарифм недопустим для нуля.\n";
     } else {
-        std::cout << "ln(|" << x << "|) = " << lnx << '\n';
+        std::cout << "ln(|" << x << "|) = " << lnx << "    ln(cmath) = " << log(fabs(x)) << '\n';
         std::cout << "Минимальное значение: " << min(sinx, cosx, lnx) << '\n';
-        std::cout << "lg(cmath) (" << x << ") = " << log(fabs(x)) << '\n'; 
-        std::cout << "cos(cmath) (" << x << ") = " << cos(x) << '\n'; 
-        std::cout << "sin(cmath) (" << x << ") = " << sin(x) << '\n'; 
     }
 }
-
 
 int main() {
     while(true) {

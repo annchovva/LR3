@@ -34,88 +34,40 @@ double S(double x, int i)
     return (pow(-1, i + 1)) * (pow(x, 2 * i + 1)) / (4 * pow(i, 2) - 1);
 }
 
-bool is_digit(std::string &input) {
-    for (char c : input) {
-        if (!isdigit(c)) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool is_double(std::string &input) {
-    for (char c : input) {
-        if (!isdigit(c) && c != '.') {
-            return false;
-        }
-    }
-    return true;
-}
-
 void result() {
     double x;
     int n, N;
     std::cout << "Введите количество членов ряда: ";
-    while(true){
-        std::string input_n;
-        std::cin  >> input_n;
-        if (is_digit(input_n)) {
-            n = std::stoi(input_n);
-            if (n > 0) {
-                break;
-            }
+        while (!(std::cin >> n) or std::cin.get() != '\n' or n <= 0) {
+        std::cout << "Введите целое положительное число x: ";
+        std::cin.clear();
+        while (std::cin.get() != '\n');
         }
-        else {
-            std::cout << "Введите целое положительное число: ";
-        }
-    }
-
     std::cout << "Введите, количество чисел, от которых хотите посчитать функцию: ";
-    while(true){
-        std::string input_N;
-        std::cin  >> input_N;
-        if(is_digit(input_N)) {
-            N = std::stoi(input_N);
-            if (N > 0) {
-                break;
-            }
-        }
-        else {
-            std::cout << "Введите целое положительное число: ";
-        }
-    }
+    while (!(std::cin >> N) or std::cin.get() != '\n' or N <= 0) {
+        std::cout << "Введите целое положительное число x: ";
+        std::cin.clear();
+        while (std::cin.get() != '\n');
 
+        }
     for (int N0 = 1; N0 <= N; N0++) {
         std::cout << "Введите x" << N0 << " (от 0.1 до 1): ";
-        
-        while (true) {
-            std::string input_x;
-            std::cin >> input_x;
-            if(is_double(input_x)) {
-                x = std::stod(input_x);
-                if (x >= 0.1 && x <= 1.0) {
-                    break;
-                }  
-                else {
-                    std::cout << "Введите число от 0.1 до 1: ";
-                }     
-            }
-            else {
-                std::cout << "Введите число от 0.1 до 1: ";
-            }
+        while (!(std::cin >> x) or std::cin.get() != '\n' or (x < 0.1 or x > 1.0)) {
+            std::cout << "Введите число x от 0.1 до 1.0 : ";
+            std::cin.clear();
+            while (std::cin.get() != '\n');
         }
-
         double my_res = 0.0;
         for (int i = 1; i <= n; i++) {
-        double dn = S(x, i);
-        my_res += dn;
+            double dn = S(x, i);
+            my_res += dn;
         }
         std::cout << "S(x) = " << my_res << "\n";
         double res;
         res = ((1 + pow(x, 2)) * atan(x) / 2) - (x / 2);
         std::cout << "Y(x) = " << res << "\n"; 
-    }
-}    
+    } 
+}
 
 int main()
 {
