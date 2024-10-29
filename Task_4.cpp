@@ -2,8 +2,8 @@
 #include <cmath>
 #include <string>
 
-//контекстное меню
-void menu() {
+void menu()
+{
     int choice;
     std::cout << "-Главное меню-\n";
     std::cout << "Задание 4. Вариант 7.\n";
@@ -16,14 +16,18 @@ void menu() {
     std::cout << "0 - Выход\n";
 }
 
-int get_input() {
+int get_input()
+{
     std::string input;
-    while (true) {
+    while (true)
+    {
         std::getline(std::cin, input);
-        if (input.length() == 1 && (input[0] == '1' || input[0] == '0')) {
+        if (input.length() == 1 && (input[0] == '1' || input[0] == '0'))
+        {
             return input[0] - '0';
         }
-        else {
+        else
+        {
             std::cout << "Введите 0 или 1: ";
         }
     }
@@ -34,51 +38,59 @@ double S(double x, int i)
     return (pow(-1, i + 1)) * (pow(x, 2 * i + 1)) / (4 * pow(i, 2) - 1);
 }
 
-void result() {
+void result()
+{
     double x;
     int n, N;
     std::cout << "Введите количество членов ряда: ";
-        while (!(std::cin >> n) or std::cin.get() != '\n' or n <= 0) {
+    while (!(std::cin >> n) or std::cin.get() != '\n' or n <= 0)
+    {
         std::cout << "Введите целое положительное число x: ";
         std::cin.clear();
         while (std::cin.get() != '\n');
-        }
+    }
     std::cout << "Введите, количество чисел, от которых хотите посчитать функцию: ";
-    while (!(std::cin >> N) or std::cin.get() != '\n' or N <= 0) {
+    while (!(std::cin >> N) or std::cin.get() != '\n' or N <= 0)
+    {
         std::cout << "Введите целое положительное число x: ";
         std::cin.clear();
         while (std::cin.get() != '\n');
-
-        }
-    for (int N0 = 1; N0 <= N; N0++) {
+    }
+    for (int N0 = 1; N0 <= N; N0++)
+    {
         std::cout << "Введите x" << N0 << " (от 0.1 до 1): ";
-        while (!(std::cin >> x) or std::cin.get() != '\n' or (x < 0.1 or x > 1.0)) {
+        while (!(std::cin >> x) or std::cin.get() != '\n' or (x < 0.1 or x > 1.0))
+        {
             std::cout << "Введите число x от 0.1 до 1.0 : ";
             std::cin.clear();
             while (std::cin.get() != '\n');
         }
         double my_res = 0.0;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++)
+        {
             double dn = S(x, i);
             my_res += dn;
         }
         std::cout << "S(x) = " << my_res << "\n";
         double res;
         res = ((1 + pow(x, 2)) * atan(x) / 2) - (x / 2);
-        std::cout << "Y(x) = " << res << "\n"; 
-    } 
+        std::cout << "Y(x) = " << res << "\n";
+    }
 }
 
 int main()
 {
-    while(true) {
+    while (true)
+    {
         menu();
         std::cout << "Выберите действие: ";
         int choice = get_input();
-        if (choice == 1) {
+        if (choice == 1)
+        {
             result();
         }
-        else if (choice == 0) {
+        else if (choice == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
@@ -87,11 +99,13 @@ int main()
         std::cout << ".\n";
         std::cout << "Желаете повторить программу (1 - да, 0 - нет)? ";
         int retry = get_input();
-        if (retry == 0) { 
+        if (retry == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
-        else if (retry == 1) {
+        else if (retry == 1)
+        {
             continue;
         }
     }

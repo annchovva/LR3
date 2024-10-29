@@ -6,8 +6,8 @@ void menu()
 {
     int choice;
     std::cout << "-Главное меню-\n";
-    std::cout << "Задание 7.\n";
-    std::cout << "Вывести все числа Армстронга, меньше введенного числа.\n";
+    std::cout << "Задание 8.\n";
+    std::cout << "Вычислить a0 - 2a1 + 4a2 - 8a3 + ... + (2^(n-1) * (-1)^(n-1) * an-1\n";
     std::cout << "Выполнила Горбачёва Анна, гр.453504\n";
     std::cout << "1 - Результат\n";
     std::cout << "0 - Выход\n";
@@ -30,51 +30,37 @@ int get_input()
     }
 }
 
-bool is_Arm(int x)
+int res(int n)
 {
-    int sum = 0;
-    int x1 = x;
-    int digits = 0;
-    while (x1 > 0)
+    int sum = 0, multi = 1, sign = 1;
+    int a;
+    for (int i = 0; i < n; ++i)
     {
-        x1 /= 10;
-        digits++;
+        std::cout << "Введите a" << i << ": ";
+        while (!(std::cin >> a) or std::cin.get() != '\n')
+        {
+            std::cout << "Введите корректное значение a: ";
+            std::cin.clear();
+            while (std::cin.get() != '\n')
+                ;
+        }
+        sum += sign * multi * a;
+        sign *= -1;
+        multi *= 2;
     }
-    x1 = x;
-    while (x1 > 0)
-    {
-        int digit = x1 % 10;
-        sum += std::pow(digit, digits);
-        x1 /= 10;
-    }
-    return sum == x;
+    std::cout << "Результат: " << sum << "\n";
 }
 
 void result()
 {
-    double X;
-    std::cout << "Введите число: ";
-    while (!(std::cin >> X) or std::cin.get() != '\n')
+    int n;
+    std::cout << "Введите n: ";
+    while (!(std::cin >> n) or std::cin.get() != '\n')
     {
-        std::cout << "Введите корректное значение: ";
+        std::cout << "Введите целое положительное число n: ";
         std::cin.clear();
-        while (std::cin.get() != '\n');
     }
-    if (X <= 1)
-    {
-        std::cout << "Нет чисел Армстронга меньших " << X << "\n";
-    }
-    else
-    {
-        std::cout << "Числа Армстронга меньшие " << X << ":\n";
-        for (int i = 1; i < X; i++)
-        {
-            if (is_Arm(i))
-            {
-                std::cout << i << "\n";
-            }
-        }
-    }
+    std::cout << res(n) << "\n";
 }
 
 int main()

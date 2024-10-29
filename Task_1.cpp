@@ -2,8 +2,8 @@
 #include <cmath>
 #include <string>
 
-//контекстное меню
-void menu() {
+void menu()
+{
     int choice;
     std::cout << "-Главное меню-\n";
     std::cout << "Задание 1.\n";
@@ -16,20 +16,25 @@ void menu() {
     std::cout << "0 - Выход\n";
 }
 
-int get_input() {
+int get_input()
+{
     std::string input;
-    while (true) {
+    while (true)
+    {
         std::getline(std::cin, input);
-        if (input.length() == 1 && (input[0] == '0' || input[0] == '1')) {
+        if (input.length() == 1 && (input[0] == '0' || input[0] == '1'))
+        {
             return input[0] - '0';
         }
-        else {
+        else
+        {
             std::cout << "Введите 0 или 1: ";
         }
     }
 }
 
-void result() {
+void result()
+{
     std::cout << "Результат: \n";
     int i = 1;
     double N = 0;
@@ -50,18 +55,21 @@ void result() {
         i++;
     }
     std::cout << N << "\n";
-}    
+}
 
 int main()
 {
-    while(true) {
+    while (true)
+    {
         menu();
         std::cout << "Выберите действие: ";
         int choice = get_input();
-        if (choice == 1) {
+        if (choice == 1)
+        {
             result();
         }
-        else if (choice == 0) {
+        else if (choice == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
@@ -70,11 +78,13 @@ int main()
         std::cout << ".\n";
         std::cout << "Желаете повторить программу? (1 - да, 0 - нет): ";
         int retry = get_input();
-        if (retry == 0) {
+        if (retry == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
-        } 
-        else if (retry == 1) {
+        }
+        else if (retry == 1)
+        {
             continue;
         }
     }

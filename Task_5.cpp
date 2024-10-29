@@ -3,7 +3,8 @@
 #include <string>
 #include <limits>
 
-void menu() {
+void menu()
+{
     int choice;
     std::cout << "-Главное меню-\n";
     std::cout << "Задание 5. Вариант 7.\n";
@@ -14,73 +15,69 @@ void menu() {
     std::cout << "0 - Выход\n";
 }
 
-int get_input() {
+int get_input()
+{
     std::string input;
-    while (true) {
+    while (true)
+    {
         std::getline(std::cin, input);
-        if (input.length() == 1 && (input[0] == '0' || input[0] == '1')) {
+        if (input.length() == 1 && (input[0] == '0' || input[0] == '1'))
+        {
             return input[0] - '0';
         }
-        else {
+        else
+        {
             std::cout << "Введите 0 или 1: ";
         }
     }
 }
 
-double f(double x) {
+double f(double x)
+{
     return cos(2 * x) - (1 / (1 + pow(x, 2)));
 }
 
-bool is_digit(std::string &input) {
-    for (char c : input) {
-        if (!isdigit(c)) {
-            return false;
-        }
-    }
-    return true;
-}
-
-void result() { 
+void result()
+{
     int n;
     double a = 2.0, b = 3.0;
     std::cout << "Введите, на сколько частей разделить область поиска корня: ";
-    while(true){
-        std::string input_n;
-        std::cin  >> input_n;
-        if (is_digit(input_n)) {
-            n = std::stoi(input_n);
-            if (n > 0) {
-                break;
-            }
-        }
-        else {
-            std::cout << "Введите целое положительное число: ";
-        }
+    while (!(std::cin >> n) or std::cin.get() != '\n' or n <= 0)
+    {
+        std::cout << "Введите целое положительное число x: ";
+        std::cin.clear();
+        while (std::cin.get() != '\n');
     }
     double h = (b - a) / n;
     std::cout << "Тогда шаг h = " << h << "\n";
     double min_res = std::numeric_limits<double>::max();
     double root = a;
-    for (double x = a; x <= b; x += h) {
-        double res = f (x); 
-        if (std::fabs(res) < std::fabs(min_res)) {
+    for (double x = a; x <= b; x += h)
+    {
+        double res = f(x);
+        if (std::fabs(res) < std::fabs(min_res))
+        {
             min_res = res;
             root = x;
         }
     }
-std::cout << "Приближенный корень уравнение f(x) = 0: x = " << root << "\n";
-std::cout << "Значение функции в этой точке: f(" << root << ") = " << f(root) << "\n";
-}    
+    std::cout << "Приближенный корень уравнение f(x) = 0: x = " << root << "\n";
+    std::cout << "Значение функции в этой точке: f(" << root << ") = " << f(root) << "\n";
+}
 
-int main() {
-    while(true) {
+int main()
+{
+    while (true)
+    {
         menu();
         std::cout << "Выберите действие: ";
         int choice = get_input();
-        if (choice == 1) {
+        if (choice == 1)
+        {
             result();
         }
-        else if (choice == 0) {
+        else if (choice == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
@@ -89,11 +86,13 @@ int main() {
         std::cout << ".\n";
         std::cout << "Желаете повторить программу (1 - да, 0 - нет)? ";
         int retry = get_input();
-        if (retry == 0) { 
+        if (retry == 0)
+        {
             std::cout << "Вы вышли из программы.\n";
             break;
         }
-        else if (retry == 1) {
+        else if (retry == 1)
+        {
             continue;
         }
     }
